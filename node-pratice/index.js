@@ -1,17 +1,12 @@
-const app=require('./app');
-console.log("Hey!!"); //hey
-console.log(app);// app function
-console.log(app.x);// value
-console.log(app.y); // value
-console.log(app.z()); // value
-
-const add=require('./add');
-console.log(add.add(2,3));//5
-console.log(add.multiply(3,4));//12
-
-const arr=[1,2,3,4,5,6,7];
-arr.filter((item)=>{
-    console.log(item); // 1,2,3,4,5,6,7
-})
-
+var http=require('http');
+http.createServer(function(req,res){
+    // send the HTTP header
+    // HTTP status 200 ok
+    // Content-type:text/plain
+    res.writeHead(200,{'Content-Type':'text/plain'});
+    // send the response body as "Welcome in GeekyAnts"
+    res.end('welcome in GeekyAnts');
+}).listen(8000);
+// console will print the message 
+console.log('server is running on port : 8000');
 
