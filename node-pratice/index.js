@@ -1,6 +1,7 @@
 var fs=require('fs');
-fs.readFile('TestFile.txt',function(err,data){
-    if(err)
-    throw err;
-    console.log(data);
+fs.unlink('hello.txt',function(){
+    console.log("Deleted successfully!");
 });
+fs.unlink('TestFile.txt',function(){
+    console.log("Deleted operation completed");
+})
