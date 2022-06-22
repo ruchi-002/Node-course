@@ -1,10 +1,7 @@
-var http=require('http');
-http.createServer(function(req,res){
-    // write a response to the client
-    res.write("Hello ,GeekyAnts");
-    //end the response
-    res.end();
-    //the server object listens on port 8080
-}).listen(8080);
-
-//
+var fs=require('fs');
+fs.writeFile('test.txt','Hello World !',function(err){
+    if(err)
+    console.log(err);
+    else 
+    console.log('Write operation complete');
+});
