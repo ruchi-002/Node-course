@@ -1,8 +1,19 @@
-var http=require('http');
-var dt=require('./add');
-http.createServer(function(req,res){
-    res.writeHead('200',{'Content-Type':'text/html'})
-    res.write("the date and time are currently " + dt.myDateTime());
-    res.end();
-}).listen(8000);
-console.log("Server is running on the port is 8000");
+const fs=require('fs');
+// fs.writeFileSync('read.txt',"Hello Everyone!!");
+fs.writeFileSync('read.txt',"Hello");
+fs.appendFileSync('read.txt'," Everyone!!");
+// fs.readFileSync('read.txt',(err)=>{
+//     if(err)
+//     console.log(err);
+//     else 
+//     console.log("read successfully");
+// })
+
+const buf_data=fs.readFileSync('read.txt');
+console.log(buf_data);
+
+const org_data=buf_data.toString();
+console.log(org_data);
+
+fs.renameSync('read.txt','My.txt');
+fs.unlinkSync('My.txt');
