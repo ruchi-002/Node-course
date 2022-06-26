@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      .err{
+        color: rgb(176, 68, 0);
+        background-color: rgb(242, 189, 189);
+        padding: 5px;
+        padding-left: 20px;
+        padding-top: 20px;  
+        margin-bottom: 6px;
+        border-radius: 3px;
+      }
+
+      .only{
+        font-size: 25px;
+        border-radius: 3px;
+        border: 1px solid lightgreen;
+        background-color: rgb(235, 255, 189);
+        margin: 4px;
+        
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 main">
+          <% if(dynamic.nameCheck==true){ %>
+            <div class="err"><p>Name is Required</p></div>
+            <% } %>
+
+            <% if(dynamic.emailCheck){ %>
+              <div class="err"><p>Email is Required</p></div>
+              <% } %>
+
+              <% if(dynamic.emailCheck==false && dynamic.nameCheck==false && dynamic.view!==0){ %>
+                  <h1>User Stored Date is </h1>
+                  <div class="only">Name : <%= dynamic.name %></div>
+                  <div class="only">Email : </h2><%= dynamic.email%></div>
+                <% } %>
+
+          <div class="form-div">
+            <div class="bg-primary text-white p-3" style="margin-top: 5vw;">Add Info</div>
+            <form id="formdata" method="post" action="/sendData">
+              <label for="name" class="p-2">NAME</label>
+              <input id="user" type="text" class="w-100" name="name"/>
+              <label for="name" class="p-2">Email</label>
+              <input id="mail" type="email" class="w-100" name="email" />
+              <button
+                type="submit"
+                class="btn btn-success p-1 m-auto w-25 mt-3"
+              >
+                Add User
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </div>
+  </body>
+</html>
