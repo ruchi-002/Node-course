@@ -23,10 +23,11 @@ const userSchema = new mongoose.Schema({
 
 const userModel = mongoose.model('userModel',userSchema);
 
-app.get('/',(req,res)=>{
-    // const data = await userModel.find({});
+app.get('/',async(req,res)=>{
+    const data = await userModel.find({});
     
-    res.render('form', {data : data});
+    // res.render('index', {data : data});
+    res.render('index',{data:data});
 });
 
 app.post('/list', (req,res)=>{
@@ -40,11 +41,11 @@ app.post('/list', (req,res)=>{
     res.redirect('/');
 });
 
-// app.get('/edit/:id', async (req,res)=>{
-//     const variable = await userModel.findById(req.params.id);
-//     console.log(variable);
-//     res.render("edit", {data:variable});
-// });
+app.get('/edit/:id', async (req,res)=>{
+    const variable = await userModel.findById(req.params.id);
+    console.log(variable);
+    res.render("edit", {data:variable});
+});
 
 app.post('/submit/:id', async(req,res)=>{
     console.log(req.params.id);
@@ -58,13 +59,13 @@ app.post('/submit/:id', async(req,res)=>{
     res.redirect('/');
 })
 
-// app.get('/delete/:_id', (req,res)=>{
-//     const uniqueid = req.params.id;
-//     userModel.deleteOne(uniqueid).then(()=>{
-//         console.log("Deleted Successfully");
-//         res.redirect('/');
-//     }).catch(err=>console.log(err));
-// });
+app.get('/delete/:_id', (req,res)=>{
+    const uniqueid = req.params.id;
+    userModel.deleteOne(uniqueid).then(()=>{
+        console.log("Deleted Successfully");
+        res.redirect('/');
+    }).catch(err=>console.log(err));
+});
 
 app.listen(8000,(req,res)=>{
     console.log("server is running on port 8000");
