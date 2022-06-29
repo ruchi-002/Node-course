@@ -10,18 +10,25 @@ app.set("view engine","ejs");
 mongoose.connect('mongodb://localhost:27017/UserInfo',{
         useNewUrlParser:true,
         useUnifiedTopology:true,
-   
 });
+// const userSchema=new mongoose.Schema({
+// name:String,
+// email:String,
+// phone:Number,
+// address:String
+// });
+// const userModel=mongoose.Schema('userModel',userSchema);
 var db=mongoose.connection;
 db.on('error',console.log.bind(console,"connection error"))
 db.once('open',function(callback){
     console.log("connection succeeded");
-})
-
-app.use(bodyParser.urlencoded({extended:true}));
-app.get('/',(req,res)=>{
-    res.render('form');
 });
+app.use(bodyParser.urlencoded({extended:true}));
+app.get('/',async(req,res)=>{
+    const data=await userModel.find({});
+    res.render('form',{data:data});
+});
+
 app.post('/list',function(req,res){
     var user_name=req.body.user_name;
     var user_email=req.body.user_email;
@@ -37,11 +44,17 @@ app.post('/list',function(req,res){
         if(err)
         throw err;
         console.log("Record inserted");
-    })
-    res.send("inserted")
-  
+    });
+    res.send("inserted");  
+    // db.collection("UserDetails").find().toArray(data,function(err,collection){
+    //     if(err)
+    //     throw err;
+    //     console.log("data is created");
+    // });
+    // res.send()
 })
 
-app.listen("3000",(req,res)=>{
-    console.log(`server is running on port 3000`);
+
+app.listen(port,(req,res)=>{
+    console.log(`server is running on port ${port}`);
 })
