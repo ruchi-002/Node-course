@@ -3,17 +3,15 @@ const app = express();
 var url="mongodb://localhost:27017"
 const mongoClient=require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
-
+// set ejs
 app.set("view engine", "ejs")
 app.use(bodyParser.urlencoded({extended:true}));
-
-
+// get
 app.get('/',(req,res)=>{
     res.render('form');
-
 })
 
-
+// post
 app.post('/list',(req,res)=>{
     var obj={
         name:req.body.user_name,
@@ -21,7 +19,7 @@ app.post('/list',(req,res)=>{
         phone:req.body.user_number,
         address:req.body.user_address
     }
-    
+    // connect
     mongoClient.connect(url, async function(err, db) {  
         if (err) throw err;  
         var dbase=db.db('UserInfo')
@@ -36,6 +34,6 @@ app.post('/list',(req,res)=>{
     });
 
 })
-
-app.listen(3000,console.log("listing"))
+// port on 3000
+app.listen(3000,console.log("listing to the port : 3000"))
     
