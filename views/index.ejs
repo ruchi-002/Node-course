@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>todos</h1>
+        <box-icon name="chevron-down" color="#e6e6e6"></box-icon>
+        <form action="/<%=filterType %>/add" method="post">
+          <input
+            id="new-todo"
+            placeholder="What needs to be done?"
+            name="todo"
+            autofocus
+          />
+          <input type="submit" value="" style="display: none" />
+        </form>
+      </div>
+      <div class="todos">
+        <ul id="todo-list">
+          <!-- <li class="todostyle"><div class="check-box"></div>
+                    <label for="todolabel">Mark all as complete</label>
+                </li> -->
+                <% for(let i = 0; i < data.length; i++) { %>
+                  <li class="todostyle  <% if( data[i].isCompleted) { %> strike <% } %> "><div id="<%= data[i]._id %>" onclick="strike(this)" <% if( data[i].isCompleted) { %> class="check-box checked" <% } else { %> class="check-box" <% } %> ></div>
+                      <%= data[i].todo %>
+                      <button id="<%= data[i]._id %>" onclick="del(this)" class="x-button">x</button>
+                  </li>
+              <% } %>
+          </ul>
+
+          
+      </div>
+      <div class="footer">
+        <span class="todo-count">
+          <strong id="counter"><%= count %></strong> items left
+        </span>
+        <ul class="filters">
+          <li>
+            <a onclick="allFilter()" id="all">All</a>
+          </li>
+          <li>
+            <a onclick="active()" id="active">Active</a>
+          </li>
+          <li>
+            <a onclick="complete()" id="completed">Completed</a>
+          </li>
+        </ul>
+        <button onclick="clearCompleted()" id="clear-completed">
+          Clear completed
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function strike(element) {
+        location.href = `/<%= filterType %>/strike/${element.id}`;
+      }
+      function del(element) {
+        location.href = `/<%= filterType %>/delete/${element.id}`;
+      }
+      function allFilter() {
+        location.href = `/all`;
+      }
+      function active() {
+        location.href = `/active`;
+      }
+      function complete() {
+        location.href = `/complete`;
+      }
+      function clearCompleted() {
+        location.href = `/<%= filterType %>/clearcompleted`;
+      }
+    </script>
+  </body>
+</html>
